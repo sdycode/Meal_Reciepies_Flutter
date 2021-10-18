@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../dummy_data.dart';
+import '../dummy_indian_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
@@ -12,7 +13,7 @@ class MealDetailScreen extends StatelessWidget {
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         text,
         style: Theme.of(context).textTheme.headline6,
@@ -27,9 +28,9 @@ class MealDetailScreen extends StatelessWidget {
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      height: 150,
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      height: 300,
       width: 300,
       child: child,
     );
@@ -38,7 +39,8 @@ class MealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context).settings.arguments as String;
-    final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
+    final selectedMeal =
+        DUMMY_INDIAN_MEALS.firstWhere((meal) => meal.id == mealId);
     return Scaffold(
       appBar: AppBar(
         title: Text('${selectedMeal.title}'),
@@ -64,14 +66,16 @@ class MealDetailScreen extends StatelessWidget {
                         vertical: 5,
                         horizontal: 10,
                       ),
-                      child: Text(selectedMeal.ingredients[index])),
+                      child: Text(
+                        selectedMeal.ingredients[index],
+                        style: const TextStyle(color: Colors.white),
+                      )),
                 ),
                 itemCount: selectedMeal.ingredients.length,
               ),
             ),
             buildSectionTitle(context, 'Steps'),
             buildContainer(
-              
               Container(
                 height: 800,
                 child: ListView.builder(
